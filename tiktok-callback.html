@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>MorcPoster – connecting TikTok</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0;font:16px/1.6 system-ui,Segoe UI,sans-serif;color:#111;background:#f7f7f8}main{max-width:640px;margin:0 auto;padding:60px 20px}code{display:block;background:#fff;border:1px solid #e3e3e6;border-radius:8px;padding:12px;word-break:break-all;margin-top:12px}</style>
+</head><body><main>
+<h1>Connecting TikTok…</h1>
+<p id="msg">Sending you back to MorcPoster on your computer.</p>
+<code id="code" hidden></code>
+<script>
+// TikTok production apps need an https redirect URI on a verified domain. This page simply forwards the
+// authorization response to the MorcPoster login helper listening on the owner's own computer.
+var q = location.search;
+if (q.indexOf('code=') !== -1 || q.indexOf('error=') !== -1) {
+  location.replace('http://localhost:8765/callback' + q);
+  setTimeout(function () {
+    document.getElementById('msg').textContent = 'If MorcPoster did not open, make sure tiktok_auth.py is running, then reload this page.';
+  }, 2500);
+} else {
+  document.getElementById('msg').textContent = 'Nothing to do here – this page only completes a TikTok login started from MorcPoster.';
+}
+</script>
+</main></body></html>
